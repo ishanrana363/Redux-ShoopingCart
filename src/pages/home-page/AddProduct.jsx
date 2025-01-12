@@ -1,11 +1,35 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { addProductData } from '../../redux/features/productSlice/productSlice'
 
 const AddProduct = () => {
+    const dispatch = useDispatch()
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const productName = e.target.productName.value;
+        const category = e.target.category.value;
+        const imgUrl = e.target.imgUrl.value;
+        const price = parseFloat(e.target.price.value);
+        const updatedDate = new Date().toISOString().split('T')[0];
+        const payload = {
+            productName,
+            category,
+            imgUrl,
+            price,
+            updatedDate
+        }
+
+        dispatch(addProductData(payload))
+        e.target.reset()
+        
+    }
+    
     return (
         <div>
             <div className=" mx-auto mt-10 bg-white p-6 rounded-lg shadow-md">
                 <h2 className="text-2xl font-bold mb-4 text-center">Product Form</h2>
-                <form onSubmit={"handleSubmit"} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4">
                     {/* Product Name */}
                     <div>
                         <label className="block text-gray-700 font-medium mb-2" htmlFor="productName">
