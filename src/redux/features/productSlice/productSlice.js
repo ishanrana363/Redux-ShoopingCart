@@ -33,14 +33,15 @@ export const productSlice = createSlice({
     reducers: {
         addProductData: (state, action) => {
             state.push({
-                id: state.length > 0 ? state[state.length - 1].id : 1,
+                id: Date.now(),
                 ...action.payload
             })
-        }
+        },
+        
     }
 });
 
 
-export const { addProductData } = productSlice.actions;
+export const { addProductData, removeCart } = productSlice.actions;
 
 export default productSlice.reducer;

@@ -1,7 +1,10 @@
 import { FaCartArrowDown } from "react-icons/fa"
+import { useSelector } from "react-redux"
 import { Link, NavLink } from "react-router-dom"
 
 const Navbar = () => {
+    const cartData = useSelector((state) => state.cartProduct)
+    const totalItems = cartData.reduce((acc, curr) => acc + curr.quantity, 0)
     return (
         <div className="bg-blue-900 text-white " >
             <div className="w-11/12 mx-auto py-3  " >
@@ -24,8 +27,15 @@ const Navbar = () => {
                                 </li>
                                 <li>
                                     <NavLink to={"/cart"} >
-                                        <span><FaCartArrowDown />
-                                        </span>
+                                        <div className="flex items-center" >
+                                            <div className="-mt-4  " >
+                                                {
+                                                    totalItems
+                                                }
+                                            </div>
+                                            <span><FaCartArrowDown />
+                                            </span>
+                                        </div>
 
                                     </NavLink>
                                 </li>
